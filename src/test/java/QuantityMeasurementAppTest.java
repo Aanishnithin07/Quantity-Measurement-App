@@ -213,6 +213,85 @@ public class QuantityMeasurementAppTest {
             failures++;
         }
 
+        // Conversion tests (UC5)
+        try {
+            testConversion_FeetToInches();
+            System.out.println("testConversion_FeetToInches passed");
+        } catch (AssertionError e) {
+            System.err.println("testConversion_FeetToInches failed: " + e.getMessage());
+            failures++;
+        }
+        try {
+            testConversion_InchesToFeet();
+            System.out.println("testConversion_InchesToFeet passed");
+        } catch (AssertionError e) {
+            System.err.println("testConversion_InchesToFeet failed: " + e.getMessage());
+            failures++;
+        }
+        try {
+            testConversion_YardsToInches();
+            System.out.println("testConversion_YardsToInches passed");
+        } catch (AssertionError e) {
+            System.err.println("testConversion_YardsToInches failed: " + e.getMessage());
+            failures++;
+        }
+        try {
+            testConversion_InchesToYards();
+            System.out.println("testConversion_InchesToYards passed");
+        } catch (AssertionError e) {
+            System.err.println("testConversion_InchesToYards failed: " + e.getMessage());
+            failures++;
+        }
+        try {
+            testConversion_CentimetersToInches();
+            System.out.println("testConversion_CentimetersToInches passed");
+        } catch (AssertionError e) {
+            System.err.println("testConversion_CentimetersToInches failed: " + e.getMessage());
+            failures++;
+        }
+        try {
+            testConversion_FeetToYard();
+            System.out.println("testConversion_FeetToYard passed");
+        } catch (AssertionError e) {
+            System.err.println("testConversion_FeetToYard failed: " + e.getMessage());
+            failures++;
+        }
+        try {
+            testConversion_RoundTrip_PreservesValue();
+            System.out.println("testConversion_RoundTrip_PreservesValue passed");
+        } catch (AssertionError e) {
+            System.err.println("testConversion_RoundTrip_PreservesValue failed: " + e.getMessage());
+            failures++;
+        }
+        try {
+            testConversion_ZeroValue();
+            System.out.println("testConversion_ZeroValue passed");
+        } catch (AssertionError e) {
+            System.err.println("testConversion_ZeroValue failed: " + e.getMessage());
+            failures++;
+        }
+        try {
+            testConversion_NegativeValue();
+            System.out.println("testConversion_NegativeValue passed");
+        } catch (AssertionError e) {
+            System.err.println("testConversion_NegativeValue failed: " + e.getMessage());
+            failures++;
+        }
+        try {
+            testConversion_InvalidUnit_Throws();
+            System.out.println("testConversion_InvalidUnit_Throws passed");
+        } catch (AssertionError e) {
+            System.err.println("testConversion_InvalidUnit_Throws failed: " + e.getMessage());
+            failures++;
+        }
+        try {
+            testConversion_NaNOrInfinite_Throws();
+            System.out.println("testConversion_NaNOrInfinite_Throws passed");
+        } catch (AssertionError e) {
+            System.err.println("testConversion_NaNOrInfinite_Throws failed: " + e.getMessage());
+            failures++;
+        }
+
         if (failures == 0) {
             System.out.println("ALL TESTS PASSED");
         } else {
@@ -408,5 +487,80 @@ public class QuantityMeasurementAppTest {
             thrown = true;
         }
         assertTrue(thrown, "Unknown unit should throw IllegalArgumentException");
+    }
+
+    // UC5 Conversion tests
+    static void testConversion_FeetToInches() {
+        double out = QuantityMeasurementApp.convert(1.0, QuantityMeasurementApp.LengthUnit.FEET, QuantityMeasurementApp.LengthUnit.INCH);
+        assertTrue(Double.compare(out, 12.0) == 0, "1 ft -> 12 in");
+    }
+
+    static void testConversion_InchesToFeet() {
+        double out = QuantityMeasurementApp.convert(24.0, QuantityMeasurementApp.LengthUnit.INCH, QuantityMeasurementApp.LengthUnit.FEET);
+        assertTrue(Double.compare(out, 2.0) == 0, "24 in -> 2 ft");
+    }
+
+    static void testConversion_YardsToInches() {
+        double out = QuantityMeasurementApp.convert(1.0, QuantityMeasurementApp.LengthUnit.YARD, QuantityMeasurementApp.LengthUnit.INCH);
+        assertTrue(Double.compare(out, 36.0) == 0, "1 yd -> 36 in");
+    }
+
+    static void testConversion_InchesToYards() {
+        double out = QuantityMeasurementApp.convert(72.0, QuantityMeasurementApp.LengthUnit.INCH, QuantityMeasurementApp.LengthUnit.YARD);
+        assertTrue(Double.compare(out, 2.0) == 0, "72 in -> 2 yd");
+    }
+
+    static void testConversion_CentimetersToInches() {
+        double out = QuantityMeasurementApp.convert(2.54, QuantityMeasurementApp.LengthUnit.CENTIMETER, QuantityMeasurementApp.LengthUnit.INCH);
+        assertTrue(Math.abs(out - 1.0) < 1e-6, "2.54 cm -> ~1 in");
+    }
+
+    static void testConversion_FeetToYard() {
+        double out = QuantityMeasurementApp.convert(6.0, QuantityMeasurementApp.LengthUnit.FEET, QuantityMeasurementApp.LengthUnit.YARD);
+        assertTrue(Math.abs(out - 2.0) < 1e-9, "6 ft -> 2 yd");
+    }
+
+    static void testConversion_RoundTrip_PreservesValue() {
+        double v = 5.5;
+        double a = QuantityMeasurementApp.convert(v, QuantityMeasurementApp.LengthUnit.FEET, QuantityMeasurementApp.LengthUnit.INCH);
+        double b = QuantityMeasurementApp.convert(a, QuantityMeasurementApp.LengthUnit.INCH, QuantityMeasurementApp.LengthUnit.FEET);
+        assertTrue(Math.abs(b - v) < 1e-9, "Round-trip preserves value within epsilon");
+    }
+
+    static void testConversion_ZeroValue() {
+        double out = QuantityMeasurementApp.convert(0.0, QuantityMeasurementApp.LengthUnit.FEET, QuantityMeasurementApp.LengthUnit.INCH);
+        assertTrue(Double.compare(out, 0.0) == 0, "0 ft -> 0 in");
+    }
+
+    static void testConversion_NegativeValue() {
+        double out = QuantityMeasurementApp.convert(-1.0, QuantityMeasurementApp.LengthUnit.FEET, QuantityMeasurementApp.LengthUnit.INCH);
+        assertTrue(Double.compare(out, -12.0) == 0, "-1 ft -> -12 in");
+    }
+
+    static void testConversion_InvalidUnit_Throws() {
+        boolean thrown = false;
+        try {
+            QuantityMeasurementApp.convert(1.0, null, QuantityMeasurementApp.LengthUnit.INCH);
+        } catch (IllegalArgumentException e) {
+            thrown = true;
+        }
+        assertTrue(thrown, "Null source unit should throw IllegalArgumentException");
+    }
+
+    static void testConversion_NaNOrInfinite_Throws() {
+        boolean thrown = false;
+        try {
+            QuantityMeasurementApp.convert(Double.NaN, QuantityMeasurementApp.LengthUnit.FEET, QuantityMeasurementApp.LengthUnit.INCH);
+        } catch (IllegalArgumentException e) {
+            thrown = true;
+        }
+        assertTrue(thrown, "NaN should throw IllegalArgumentException");
+        thrown = false;
+        try {
+            QuantityMeasurementApp.convert(Double.POSITIVE_INFINITY, QuantityMeasurementApp.LengthUnit.FEET, QuantityMeasurementApp.LengthUnit.INCH);
+        } catch (IllegalArgumentException e) {
+            thrown = true;
+        }
+        assertTrue(thrown, "Infinity should throw IllegalArgumentException");
     }
 }

@@ -18,6 +18,10 @@ public class QuantityMeasurementApp {
             return value * inchesPerUnit;
         }
 
+        public double getInchesPerUnit() {
+            return inchesPerUnit;
+        }
+
         public static LengthUnit parse(String unit) {
             if (unit == null) throw new IllegalArgumentException("unit is null");
             String u = unit.trim().toLowerCase();
@@ -41,6 +45,11 @@ public class QuantityMeasurementApp {
 
         public double toInches() {
             return unit.toInches(value);
+        }
+
+        public QuantityLength convertTo(LengthUnit target) {
+            double converted = QuantityMeasurementApp.convert(this.value, this.unit, target);
+            return new QuantityLength(converted, target);
         }
 
         @Override
@@ -78,6 +87,22 @@ public class QuantityMeasurementApp {
         LengthUnit u1 = LengthUnit.parse(unit1);
         LengthUnit u2 = LengthUnit.parse(unit2);
         return new QuantityLength(value1, u1).equals(new QuantityLength(value2, u2));
+    }
+
+    /**
+     * Convert a numeric value from source unit to target unit.
+     * @param value source numeric value
+     * @param source source unit (non-null)
+     * @param target target unit (non-null)
+     * @return converted numeric value in target unit
+     * @throws IllegalArgumentException for invalid inputs (null units, NaN, infinite)
+     */
+    public static double convert(double value, LengthUnit source, LengthUnit target) {
+        if (source == null || target == null) throw new IllegalArgumentException("source and target units must be non-null");
+        if (!Double.isFinite(value)) throw new IllegalArgumentException("value must be a finite number");
+        // normalize to inches then to target
+        double inches = source.toInches(value);
+        return inches / target.getInchesPerUnit();
     }
 
     public static void main(String[] args) {
