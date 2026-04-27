@@ -378,6 +378,92 @@ public class QuantityMeasurementAppTest {
             failures++;
         }
 
+        // UC7: Addition with explicit target unit
+        try {
+            testAddition_ExplicitTargetUnit_Feet();
+            System.out.println("testAddition_ExplicitTargetUnit_Feet passed");
+        } catch (AssertionError e) {
+            System.err.println("testAddition_ExplicitTargetUnit_Feet failed: " + e.getMessage());
+            failures++;
+        }
+        try {
+            testAddition_ExplicitTargetUnit_Inches();
+            System.out.println("testAddition_ExplicitTargetUnit_Inches passed");
+        } catch (AssertionError e) {
+            System.err.println("testAddition_ExplicitTargetUnit_Inches failed: " + e.getMessage());
+            failures++;
+        }
+        try {
+            testAddition_ExplicitTargetUnit_Yards();
+            System.out.println("testAddition_ExplicitTargetUnit_Yards passed");
+        } catch (AssertionError e) {
+            System.err.println("testAddition_ExplicitTargetUnit_Yards failed: " + e.getMessage());
+            failures++;
+        }
+        try {
+            testAddition_ExplicitTargetUnit_Centimeters();
+            System.out.println("testAddition_ExplicitTargetUnit_Centimeters passed");
+        } catch (AssertionError e) {
+            System.err.println("testAddition_ExplicitTargetUnit_Centimeters failed: " + e.getMessage());
+            failures++;
+        }
+        try {
+            testAddition_ExplicitTargetUnit_SameAsFirstOperand();
+            System.out.println("testAddition_ExplicitTargetUnit_SameAsFirstOperand passed");
+        } catch (AssertionError e) {
+            System.err.println("testAddition_ExplicitTargetUnit_SameAsFirstOperand failed: " + e.getMessage());
+            failures++;
+        }
+        try {
+            testAddition_ExplicitTargetUnit_SameAsSecondOperand();
+            System.out.println("testAddition_ExplicitTargetUnit_SameAsSecondOperand passed");
+        } catch (AssertionError e) {
+            System.err.println("testAddition_ExplicitTargetUnit_SameAsSecondOperand failed: " + e.getMessage());
+            failures++;
+        }
+        try {
+            testAddition_ExplicitTargetUnit_Commutativity();
+            System.out.println("testAddition_ExplicitTargetUnit_Commutativity passed");
+        } catch (AssertionError e) {
+            System.err.println("testAddition_ExplicitTargetUnit_Commutativity failed: " + e.getMessage());
+            failures++;
+        }
+        try {
+            testAddition_ExplicitTargetUnit_WithZero();
+            System.out.println("testAddition_ExplicitTargetUnit_WithZero passed");
+        } catch (AssertionError e) {
+            System.err.println("testAddition_ExplicitTargetUnit_WithZero failed: " + e.getMessage());
+            failures++;
+        }
+        try {
+            testAddition_ExplicitTargetUnit_NegativeValues();
+            System.out.println("testAddition_ExplicitTargetUnit_NegativeValues passed");
+        } catch (AssertionError e) {
+            System.err.println("testAddition_ExplicitTargetUnit_NegativeValues failed: " + e.getMessage());
+            failures++;
+        }
+        try {
+            testAddition_ExplicitTargetUnit_NullTargetUnit();
+            System.out.println("testAddition_ExplicitTargetUnit_NullTargetUnit passed");
+        } catch (AssertionError e) {
+            System.err.println("testAddition_ExplicitTargetUnit_NullTargetUnit failed: " + e.getMessage());
+            failures++;
+        }
+        try {
+            testAddition_ExplicitTargetUnit_LargeToSmallScale();
+            System.out.println("testAddition_ExplicitTargetUnit_LargeToSmallScale passed");
+        } catch (AssertionError e) {
+            System.err.println("testAddition_ExplicitTargetUnit_LargeToSmallScale failed: " + e.getMessage());
+            failures++;
+        }
+        try {
+            testAddition_ExplicitTargetUnit_SmallToLargeScale();
+            System.out.println("testAddition_ExplicitTargetUnit_SmallToLargeScale passed");
+        } catch (AssertionError e) {
+            System.err.println("testAddition_ExplicitTargetUnit_SmallToLargeScale failed: " + e.getMessage());
+            failures++;
+        }
+
         if (failures == 0) {
             System.out.println("ALL TESTS PASSED");
         } else {
@@ -740,5 +826,97 @@ public class QuantityMeasurementAppTest {
         QuantityMeasurementApp.QuantityLength b = new QuantityMeasurementApp.QuantityLength(0.002, QuantityMeasurementApp.LengthUnit.FEET);
         QuantityMeasurementApp.QuantityLength r = QuantityMeasurementApp.add(a, b);
         assertTrue(Math.abs(r.getValue() - 0.003) < 1e-9, "Small value addition should work");
+    }
+
+    // UC7: Addition with explicit target unit - tests
+    static void testAddition_ExplicitTargetUnit_Feet() {
+        QuantityMeasurementApp.QuantityLength a = new QuantityMeasurementApp.QuantityLength(1.0, QuantityMeasurementApp.LengthUnit.FEET);
+        QuantityMeasurementApp.QuantityLength b = new QuantityMeasurementApp.QuantityLength(12.0, QuantityMeasurementApp.LengthUnit.INCH);
+        QuantityMeasurementApp.QuantityLength r = QuantityMeasurementApp.add(a, b, QuantityMeasurementApp.LengthUnit.FEET);
+        assertTrue(Math.abs(r.getValue() - 2.0) < 1e-9 && r.getUnit() == QuantityMeasurementApp.LengthUnit.FEET, "1 ft + 12 in = 2 ft (target ft)");
+    }
+
+    static void testAddition_ExplicitTargetUnit_Inches() {
+        QuantityMeasurementApp.QuantityLength a = new QuantityMeasurementApp.QuantityLength(1.0, QuantityMeasurementApp.LengthUnit.FEET);
+        QuantityMeasurementApp.QuantityLength b = new QuantityMeasurementApp.QuantityLength(12.0, QuantityMeasurementApp.LengthUnit.INCH);
+        QuantityMeasurementApp.QuantityLength r = QuantityMeasurementApp.add(a, b, QuantityMeasurementApp.LengthUnit.INCH);
+        assertTrue(Math.abs(r.getValue() - 24.0) < 1e-9 && r.getUnit() == QuantityMeasurementApp.LengthUnit.INCH, "1 ft + 12 in = 24 in (target in)");
+    }
+
+    static void testAddition_ExplicitTargetUnit_Yards() {
+        QuantityMeasurementApp.QuantityLength a = new QuantityMeasurementApp.QuantityLength(1.0, QuantityMeasurementApp.LengthUnit.FEET);
+        QuantityMeasurementApp.QuantityLength b = new QuantityMeasurementApp.QuantityLength(12.0, QuantityMeasurementApp.LengthUnit.INCH);
+        QuantityMeasurementApp.QuantityLength r = QuantityMeasurementApp.add(a, b, QuantityMeasurementApp.LengthUnit.YARD);
+        double expected = 2.0 / 3.0; // 2 ft = 0.666...
+        assertTrue(Math.abs(r.getValue() - expected) < 1e-6 && r.getUnit() == QuantityMeasurementApp.LengthUnit.YARD, "1 ft + 12 in = ~0.667 yd (target yd)");
+    }
+
+    static void testAddition_ExplicitTargetUnit_Centimeters() {
+        QuantityMeasurementApp.QuantityLength a = new QuantityMeasurementApp.QuantityLength(1.0, QuantityMeasurementApp.LengthUnit.INCH);
+        QuantityMeasurementApp.QuantityLength b = new QuantityMeasurementApp.QuantityLength(1.0, QuantityMeasurementApp.LengthUnit.INCH);
+        QuantityMeasurementApp.QuantityLength r = QuantityMeasurementApp.add(a, b, QuantityMeasurementApp.LengthUnit.CENTIMETER);
+        assertTrue(Math.abs(r.getValue() - 5.08) < 1e-3 && r.getUnit() == QuantityMeasurementApp.LengthUnit.CENTIMETER, "1 in + 1 in = ~5.08 cm (target cm)");
+    }
+
+    static void testAddition_ExplicitTargetUnit_SameAsFirstOperand() {
+        QuantityMeasurementApp.QuantityLength a = new QuantityMeasurementApp.QuantityLength(2.0, QuantityMeasurementApp.LengthUnit.YARD);
+        QuantityMeasurementApp.QuantityLength b = new QuantityMeasurementApp.QuantityLength(3.0, QuantityMeasurementApp.LengthUnit.FEET);
+        QuantityMeasurementApp.QuantityLength r = QuantityMeasurementApp.add(a, b, QuantityMeasurementApp.LengthUnit.YARD);
+        assertTrue(Math.abs(r.getValue() - 3.0) < 1e-9 && r.getUnit() == QuantityMeasurementApp.LengthUnit.YARD, "2 yd + 3 ft = 3 yd (target yd)");
+    }
+
+    static void testAddition_ExplicitTargetUnit_SameAsSecondOperand() {
+        QuantityMeasurementApp.QuantityLength a = new QuantityMeasurementApp.QuantityLength(2.0, QuantityMeasurementApp.LengthUnit.YARD);
+        QuantityMeasurementApp.QuantityLength b = new QuantityMeasurementApp.QuantityLength(3.0, QuantityMeasurementApp.LengthUnit.FEET);
+        QuantityMeasurementApp.QuantityLength r = QuantityMeasurementApp.add(a, b, QuantityMeasurementApp.LengthUnit.FEET);
+        assertTrue(Math.abs(r.getValue() - 9.0) < 1e-9 && r.getUnit() == QuantityMeasurementApp.LengthUnit.FEET, "2 yd + 3 ft = 9 ft (target ft)");
+    }
+
+    static void testAddition_ExplicitTargetUnit_Commutativity() {
+        QuantityMeasurementApp.QuantityLength a = new QuantityMeasurementApp.QuantityLength(1.0, QuantityMeasurementApp.LengthUnit.FEET);
+        QuantityMeasurementApp.QuantityLength b = new QuantityMeasurementApp.QuantityLength(12.0, QuantityMeasurementApp.LengthUnit.INCH);
+        QuantityMeasurementApp.QuantityLength r1 = QuantityMeasurementApp.add(a, b, QuantityMeasurementApp.LengthUnit.YARD);
+        QuantityMeasurementApp.QuantityLength r2 = QuantityMeasurementApp.add(b, a, QuantityMeasurementApp.LengthUnit.YARD);
+        assertTrue(Math.abs(r1.getValue() - r2.getValue()) < 1e-9 && r1.getUnit() == r2.getUnit(), "Addition with explicit target unit should be commutative");
+    }
+
+    static void testAddition_ExplicitTargetUnit_WithZero() {
+        QuantityMeasurementApp.QuantityLength a = new QuantityMeasurementApp.QuantityLength(5.0, QuantityMeasurementApp.LengthUnit.FEET);
+        QuantityMeasurementApp.QuantityLength b = new QuantityMeasurementApp.QuantityLength(0.0, QuantityMeasurementApp.LengthUnit.INCH);
+        QuantityMeasurementApp.QuantityLength r = QuantityMeasurementApp.add(a, b, QuantityMeasurementApp.LengthUnit.YARD);
+        double expected = 5.0 / 3.0; // 1.666...
+        assertTrue(Math.abs(r.getValue() - expected) < 1e-6 && r.getUnit() == QuantityMeasurementApp.LengthUnit.YARD, "5 ft + 0 in = ~1.667 yd (target yd)");
+    }
+
+    static void testAddition_ExplicitTargetUnit_NegativeValues() {
+        QuantityMeasurementApp.QuantityLength a = new QuantityMeasurementApp.QuantityLength(5.0, QuantityMeasurementApp.LengthUnit.FEET);
+        QuantityMeasurementApp.QuantityLength b = new QuantityMeasurementApp.QuantityLength(-2.0, QuantityMeasurementApp.LengthUnit.FEET);
+        QuantityMeasurementApp.QuantityLength r = QuantityMeasurementApp.add(a, b, QuantityMeasurementApp.LengthUnit.INCH);
+        assertTrue(Math.abs(r.getValue() - 36.0) < 1e-9 && r.getUnit() == QuantityMeasurementApp.LengthUnit.INCH, "5 ft + -2 ft = 36 in (target in)");
+    }
+
+    static void testAddition_ExplicitTargetUnit_NullTargetUnit() {
+        boolean thrown = false;
+        try {
+            QuantityMeasurementApp.add(new QuantityMeasurementApp.QuantityLength(1.0, QuantityMeasurementApp.LengthUnit.FEET), new QuantityMeasurementApp.QuantityLength(12.0, QuantityMeasurementApp.LengthUnit.INCH), null);
+        } catch (IllegalArgumentException e) {
+            thrown = true;
+        }
+        assertTrue(thrown, "Null target unit should throw IllegalArgumentException");
+    }
+
+    static void testAddition_ExplicitTargetUnit_LargeToSmallScale() {
+        QuantityMeasurementApp.QuantityLength a = new QuantityMeasurementApp.QuantityLength(1000.0, QuantityMeasurementApp.LengthUnit.FEET);
+        QuantityMeasurementApp.QuantityLength b = new QuantityMeasurementApp.QuantityLength(500.0, QuantityMeasurementApp.LengthUnit.FEET);
+        QuantityMeasurementApp.QuantityLength r = QuantityMeasurementApp.add(a, b, QuantityMeasurementApp.LengthUnit.INCH);
+        assertTrue(Math.abs(r.getValue() - 18000.0) < 1e-6 && r.getUnit() == QuantityMeasurementApp.LengthUnit.INCH, "1000 ft + 500 ft = 18000 in (target in)");
+    }
+
+    static void testAddition_ExplicitTargetUnit_SmallToLargeScale() {
+        QuantityMeasurementApp.QuantityLength a = new QuantityMeasurementApp.QuantityLength(12.0, QuantityMeasurementApp.LengthUnit.INCH);
+        QuantityMeasurementApp.QuantityLength b = new QuantityMeasurementApp.QuantityLength(12.0, QuantityMeasurementApp.LengthUnit.INCH);
+        QuantityMeasurementApp.QuantityLength r = QuantityMeasurementApp.add(a, b, QuantityMeasurementApp.LengthUnit.YARD);
+        double expected = 24.0 / 36.0; // 2/3
+        assertTrue(Math.abs(r.getValue() - expected) < 1e-6 && r.getUnit() == QuantityMeasurementApp.LengthUnit.YARD, "24 in = ~0.667 yd (target yd)");
     }
 }

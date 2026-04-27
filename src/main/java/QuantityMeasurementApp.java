@@ -118,6 +118,19 @@ public class QuantityMeasurementApp {
     }
 
     /**
+     * UC7: Add two quantities and return the result expressed in the explicitly specified target unit.
+     * Returns a new QuantityLength in the requested target unit; operands are not modified.
+     */
+    public static QuantityLength add(QuantityLength a, QuantityLength b, LengthUnit target) {
+        if (a == null || b == null) throw new IllegalArgumentException("operands must be non-null");
+        if (target == null) throw new IllegalArgumentException("target unit must be non-null");
+        if (!Double.isFinite(a.getValue()) || !Double.isFinite(b.getValue())) throw new IllegalArgumentException("values must be finite");
+        double sumInches = a.toInches() + b.toInches();
+        double resultValue = sumInches / target.getInchesPerUnit();
+        return new QuantityLength(resultValue, target);
+    }
+
+    /**
      * Add two raw values with units and return result expressed in the provided target unit.
      */
     public static QuantityLength add(double v1, LengthUnit u1, double v2, LengthUnit u2, LengthUnit target) {
