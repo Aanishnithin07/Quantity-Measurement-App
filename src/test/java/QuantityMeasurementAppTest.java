@@ -113,6 +113,106 @@ public class QuantityMeasurementAppTest {
             failures++;
         }
 
+        // Yard and centimeter tests
+        try {
+            testYardEquality_SameValue();
+            System.out.println("testYardEquality_SameValue passed");
+        } catch (AssertionError e) {
+            System.err.println("testYardEquality_SameValue failed: " + e.getMessage());
+            failures++;
+        }
+        try {
+            testYardEquality_DifferentValue();
+            System.out.println("testYardEquality_DifferentValue passed");
+        } catch (AssertionError e) {
+            System.err.println("testYardEquality_DifferentValue failed: " + e.getMessage());
+            failures++;
+        }
+        try {
+            testYardToFeet_EquivalentValue();
+            System.out.println("testYardToFeet_EquivalentValue passed");
+        } catch (AssertionError e) {
+            System.err.println("testYardToFeet_EquivalentValue failed: " + e.getMessage());
+            failures++;
+        }
+        try {
+            testYardToInches_EquivalentValue();
+            System.out.println("testYardToInches_EquivalentValue passed");
+        } catch (AssertionError e) {
+            System.err.println("testYardToInches_EquivalentValue failed: " + e.getMessage());
+            failures++;
+        }
+        try {
+            testYardToFeet_NonEquivalentValue();
+            System.out.println("testYardToFeet_NonEquivalentValue passed");
+        } catch (AssertionError e) {
+            System.err.println("testYardToFeet_NonEquivalentValue failed: " + e.getMessage());
+            failures++;
+        }
+        try {
+            testCentimetersToInches_EquivalentValue();
+            System.out.println("testCentimetersToInches_EquivalentValue passed");
+        } catch (AssertionError e) {
+            System.err.println("testCentimetersToInches_EquivalentValue failed: " + e.getMessage());
+            failures++;
+        }
+        try {
+            testCentimetersToFeet_NonEquivalentValue();
+            System.out.println("testCentimetersToFeet_NonEquivalentValue passed");
+        } catch (AssertionError e) {
+            System.err.println("testCentimetersToFeet_NonEquivalentValue failed: " + e.getMessage());
+            failures++;
+        }
+        try {
+            testMultiUnit_TransitiveProperty();
+            System.out.println("testMultiUnit_TransitiveProperty passed");
+        } catch (AssertionError e) {
+            System.err.println("testMultiUnit_TransitiveProperty failed: " + e.getMessage());
+            failures++;
+        }
+        try {
+            testEquality_YardWithNullUnit();
+            System.out.println("testEquality_YardWithNullUnit passed");
+        } catch (AssertionError e) {
+            System.err.println("testEquality_YardWithNullUnit failed: " + e.getMessage());
+            failures++;
+        }
+        try {
+            testEquality_YardSameReference();
+            System.out.println("testEquality_YardSameReference passed");
+        } catch (AssertionError e) {
+            System.err.println("testEquality_YardSameReference failed: " + e.getMessage());
+            failures++;
+        }
+        try {
+            testEquality_YardNullComparison();
+            System.out.println("testEquality_YardNullComparison passed");
+        } catch (AssertionError e) {
+            System.err.println("testEquality_YardNullComparison failed: " + e.getMessage());
+            failures++;
+        }
+        try {
+            testEquality_CentimetersWithNullUnit();
+            System.out.println("testEquality_CentimetersWithNullUnit passed");
+        } catch (AssertionError e) {
+            System.err.println("testEquality_CentimetersWithNullUnit failed: " + e.getMessage());
+            failures++;
+        }
+        try {
+            testEquality_CentimetersSameReference();
+            System.out.println("testEquality_CentimetersSameReference passed");
+        } catch (AssertionError e) {
+            System.err.println("testEquality_CentimetersSameReference failed: " + e.getMessage());
+            failures++;
+        }
+        try {
+            testEquality_CentimetersNullComparison();
+            System.out.println("testEquality_CentimetersNullComparison passed");
+        } catch (AssertionError e) {
+            System.err.println("testEquality_CentimetersNullComparison failed: " + e.getMessage());
+            failures++;
+        }
+
         if (failures == 0) {
             System.out.println("ALL TESTS PASSED");
         } else {
