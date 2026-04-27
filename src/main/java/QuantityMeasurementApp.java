@@ -105,6 +105,42 @@ public class QuantityMeasurementApp {
         return inches / target.getInchesPerUnit();
     }
 
+    /**
+     * Add two quantities and return the result in the unit of the first operand.
+     * Preserves immutability by returning a new QuantityLength instance.
+     */
+    public static QuantityLength add(QuantityLength a, QuantityLength b) {
+        if (a == null || b == null) throw new IllegalArgumentException("operands must be non-null");
+        if (!Double.isFinite(a.getValue()) || !Double.isFinite(b.getValue())) throw new IllegalArgumentException("values must be finite");
+        double sumInches = a.toInches() + b.toInches();
+        double resultValueInAUnit = sumInches / a.getUnit().getInchesPerUnit();
+        return new QuantityLength(resultValueInAUnit, a.getUnit());
+    }
+
+    /**
+     * UC7: Add two quantities and return the result expressed in the explicitly specified target unit.
+     * Returns a new QuantityLength in the requested target unit; operands are not modified.
+     */
+    public static QuantityLength add(QuantityLength a, QuantityLength b, LengthUnit target) {
+        if (a == null || b == null) throw new IllegalArgumentException("operands must be non-null");
+        if (target == null) throw new IllegalArgumentException("target unit must be non-null");
+        if (!Double.isFinite(a.getValue()) || !Double.isFinite(b.getValue())) throw new IllegalArgumentException("values must be finite");
+        double sumInches = a.toInches() + b.toInches();
+        double resultValue = sumInches / target.getInchesPerUnit();
+        return new QuantityLength(resultValue, target);
+    }
+
+    /**
+     * Add two raw values with units and return result expressed in the provided target unit.
+     */
+    public static QuantityLength add(double v1, LengthUnit u1, double v2, LengthUnit u2, LengthUnit target) {
+        if (u1 == null || u2 == null || target == null) throw new IllegalArgumentException("units must be non-null");
+        if (!Double.isFinite(v1) || !Double.isFinite(v2)) throw new IllegalArgumentException("values must be finite");
+        double sumInches = u1.toInches(v1) + u2.toInches(v2);
+        double result = sumInches / target.getInchesPerUnit();
+        return new QuantityLength(result, target);
+    }
+
     public static void main(String[] args) {
         QuantityLength f1 = new QuantityLength(1.0, LengthUnit.FEET);
         QuantityLength f2 = new QuantityLength(1.0, LengthUnit.FEET);
