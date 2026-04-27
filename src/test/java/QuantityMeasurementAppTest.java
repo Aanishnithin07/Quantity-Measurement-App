@@ -127,62 +127,156 @@ public class QuantityMeasurementAppTest {
 
     // Feet tests
     static void testFeetEquality_SameValue() {
-        QuantityMeasurementApp.Feet a = new QuantityMeasurementApp.Feet(1.0);
-        QuantityMeasurementApp.Feet b = new QuantityMeasurementApp.Feet(1.0);
+        QuantityMeasurementApp.QuantityLength a = new QuantityMeasurementApp.QuantityLength(1.0, QuantityMeasurementApp.LengthUnit.FEET);
+        QuantityMeasurementApp.QuantityLength b = new QuantityMeasurementApp.QuantityLength(1.0, QuantityMeasurementApp.LengthUnit.FEET);
         assertTrue(a.equals(b), "1.0 ft should equal 1.0 ft");
         assertTrue(b.equals(a), "Equality should be symmetric");
     }
 
     static void testFeetEquality_DifferentValue() {
-        QuantityMeasurementApp.Feet a = new QuantityMeasurementApp.Feet(1.0);
-        QuantityMeasurementApp.Feet b = new QuantityMeasurementApp.Feet(2.0);
+        QuantityMeasurementApp.QuantityLength a = new QuantityMeasurementApp.QuantityLength(1.0, QuantityMeasurementApp.LengthUnit.FEET);
+        QuantityMeasurementApp.QuantityLength b = new QuantityMeasurementApp.QuantityLength(2.0, QuantityMeasurementApp.LengthUnit.FEET);
         assertTrue(!a.equals(b), "1.0 ft should not equal 2.0 ft");
     }
 
     static void testFeetEquality_NullComparison() {
-        QuantityMeasurementApp.Feet a = new QuantityMeasurementApp.Feet(1.0);
+        QuantityMeasurementApp.QuantityLength a = new QuantityMeasurementApp.QuantityLength(1.0, QuantityMeasurementApp.LengthUnit.FEET);
         assertTrue(!a.equals(null), "Object should not equal null");
     }
 
     static void testFeetEquality_NonNumericInput() {
-        QuantityMeasurementApp.Feet a = new QuantityMeasurementApp.Feet(1.0);
+        QuantityMeasurementApp.QuantityLength a = new QuantityMeasurementApp.QuantityLength(1.0, QuantityMeasurementApp.LengthUnit.FEET);
         Object o = "1.0"; // non-numeric object
         assertTrue(!a.equals(o), "Feet should not equal object of different type");
     }
 
     static void testFeetEquality_SameReference() {
-        QuantityMeasurementApp.Feet a = new QuantityMeasurementApp.Feet(1.0);
+        QuantityMeasurementApp.QuantityLength a = new QuantityMeasurementApp.QuantityLength(1.0, QuantityMeasurementApp.LengthUnit.FEET);
         assertTrue(a.equals(a), "Reflexive property failed");
     }
 
     // Inches tests
     static void testInchesEquality_SameValue() {
-        QuantityMeasurementApp.Inches a = new QuantityMeasurementApp.Inches(1.0);
-        QuantityMeasurementApp.Inches b = new QuantityMeasurementApp.Inches(1.0);
+        QuantityMeasurementApp.QuantityLength a = new QuantityMeasurementApp.QuantityLength(1.0, QuantityMeasurementApp.LengthUnit.INCH);
+        QuantityMeasurementApp.QuantityLength b = new QuantityMeasurementApp.QuantityLength(1.0, QuantityMeasurementApp.LengthUnit.INCH);
         assertTrue(a.equals(b), "1.0 in should equal 1.0 in");
         assertTrue(b.equals(a), "Equality should be symmetric");
     }
 
     static void testInchesEquality_DifferentValue() {
-        QuantityMeasurementApp.Inches a = new QuantityMeasurementApp.Inches(1.0);
-        QuantityMeasurementApp.Inches b = new QuantityMeasurementApp.Inches(2.0);
+        QuantityMeasurementApp.QuantityLength a = new QuantityMeasurementApp.QuantityLength(1.0, QuantityMeasurementApp.LengthUnit.INCH);
+        QuantityMeasurementApp.QuantityLength b = new QuantityMeasurementApp.QuantityLength(2.0, QuantityMeasurementApp.LengthUnit.INCH);
         assertTrue(!a.equals(b), "1.0 in should not equal 2.0 in");
     }
 
     static void testInchesEquality_NullComparison() {
-        QuantityMeasurementApp.Inches a = new QuantityMeasurementApp.Inches(1.0);
+        QuantityMeasurementApp.QuantityLength a = new QuantityMeasurementApp.QuantityLength(1.0, QuantityMeasurementApp.LengthUnit.INCH);
         assertTrue(!a.equals(null), "Object should not equal null");
     }
 
     static void testInchesEquality_NonNumericInput() {
-        QuantityMeasurementApp.Inches a = new QuantityMeasurementApp.Inches(1.0);
+        QuantityMeasurementApp.QuantityLength a = new QuantityMeasurementApp.QuantityLength(1.0, QuantityMeasurementApp.LengthUnit.INCH);
         Object o = "1.0"; // non-numeric object
         assertTrue(!a.equals(o), "Inches should not equal object of different type");
     }
 
     static void testInchesEquality_SameReference() {
-        QuantityMeasurementApp.Inches a = new QuantityMeasurementApp.Inches(1.0);
+        QuantityMeasurementApp.QuantityLength a = new QuantityMeasurementApp.QuantityLength(1.0, QuantityMeasurementApp.LengthUnit.INCH);
         assertTrue(a.equals(a), "Reflexive property failed");
+    }
+
+    // Yard tests
+    static void testYardEquality_SameValue() {
+        QuantityMeasurementApp.QuantityLength a = new QuantityMeasurementApp.QuantityLength(1.0, QuantityMeasurementApp.LengthUnit.YARD);
+        QuantityMeasurementApp.QuantityLength b = new QuantityMeasurementApp.QuantityLength(1.0, QuantityMeasurementApp.LengthUnit.YARD);
+        assertTrue(a.equals(b), "1.0 yd should equal 1.0 yd");
+    }
+
+    static void testYardEquality_DifferentValue() {
+        QuantityMeasurementApp.QuantityLength a = new QuantityMeasurementApp.QuantityLength(1.0, QuantityMeasurementApp.LengthUnit.YARD);
+        QuantityMeasurementApp.QuantityLength b = new QuantityMeasurementApp.QuantityLength(2.0, QuantityMeasurementApp.LengthUnit.YARD);
+        assertTrue(!a.equals(b), "1.0 yd should not equal 2.0 yd");
+    }
+
+    static void testYardToFeet_EquivalentValue() {
+        QuantityMeasurementApp.QuantityLength a = new QuantityMeasurementApp.QuantityLength(1.0, QuantityMeasurementApp.LengthUnit.YARD);
+        QuantityMeasurementApp.QuantityLength b = new QuantityMeasurementApp.QuantityLength(3.0, QuantityMeasurementApp.LengthUnit.FEET);
+        assertTrue(a.equals(b), "1.0 yd should equal 3.0 ft");
+        assertTrue(b.equals(a), "Symmetric equality should hold");
+    }
+
+    static void testYardToInches_EquivalentValue() {
+        QuantityMeasurementApp.QuantityLength a = new QuantityMeasurementApp.QuantityLength(1.0, QuantityMeasurementApp.LengthUnit.YARD);
+        QuantityMeasurementApp.QuantityLength b = new QuantityMeasurementApp.QuantityLength(36.0, QuantityMeasurementApp.LengthUnit.INCH);
+        assertTrue(a.equals(b), "1.0 yd should equal 36.0 in");
+    }
+
+    static void testYardToFeet_NonEquivalentValue() {
+        QuantityMeasurementApp.QuantityLength a = new QuantityMeasurementApp.QuantityLength(1.0, QuantityMeasurementApp.LengthUnit.YARD);
+        QuantityMeasurementApp.QuantityLength b = new QuantityMeasurementApp.QuantityLength(2.0, QuantityMeasurementApp.LengthUnit.FEET);
+        assertTrue(!a.equals(b), "1.0 yd should not equal 2.0 ft");
+    }
+
+    // Centimeter tests
+    static void testCentimetersToInches_EquivalentValue() {
+        QuantityMeasurementApp.QuantityLength a = new QuantityMeasurementApp.QuantityLength(1.0, QuantityMeasurementApp.LengthUnit.CENTIMETER);
+        QuantityMeasurementApp.QuantityLength b = new QuantityMeasurementApp.QuantityLength(0.393701, QuantityMeasurementApp.LengthUnit.INCH);
+        assertTrue(a.equals(b), "1.0 cm should equal 0.393701 in");
+    }
+
+    static void testCentimetersToFeet_NonEquivalentValue() {
+        QuantityMeasurementApp.QuantityLength a = new QuantityMeasurementApp.QuantityLength(1.0, QuantityMeasurementApp.LengthUnit.CENTIMETER);
+        QuantityMeasurementApp.QuantityLength b = new QuantityMeasurementApp.QuantityLength(1.0, QuantityMeasurementApp.LengthUnit.FEET);
+        assertTrue(!a.equals(b), "1.0 cm should not equal 1.0 ft");
+    }
+
+    static void testMultiUnit_TransitiveProperty() {
+        QuantityMeasurementApp.QuantityLength a = new QuantityMeasurementApp.QuantityLength(1.0, QuantityMeasurementApp.LengthUnit.YARD);
+        QuantityMeasurementApp.QuantityLength b = new QuantityMeasurementApp.QuantityLength(3.0, QuantityMeasurementApp.LengthUnit.FEET);
+        QuantityMeasurementApp.QuantityLength c = new QuantityMeasurementApp.QuantityLength(36.0, QuantityMeasurementApp.LengthUnit.INCH);
+        assertTrue(a.equals(b), "1 yd == 3 ft");
+        assertTrue(b.equals(c), "3 ft == 36 in");
+        assertTrue(a.equals(c), "Transitive: 1 yd == 36 in");
+    }
+
+    static void testEquality_YardWithNullUnit() {
+        boolean thrown = false;
+        try {
+            QuantityMeasurementApp.compare(1.0, null, 1.0, "in");
+        } catch (IllegalArgumentException e) {
+            thrown = true;
+        }
+        assertTrue(thrown, "Null unit should throw IllegalArgumentException");
+    }
+
+    static void testEquality_YardSameReference() {
+        QuantityMeasurementApp.QuantityLength a = new QuantityMeasurementApp.QuantityLength(1.0, QuantityMeasurementApp.LengthUnit.YARD);
+        assertTrue(a.equals(a), "Reflexive property failed");
+    }
+
+    static void testEquality_YardNullComparison() {
+        QuantityMeasurementApp.QuantityLength a = new QuantityMeasurementApp.QuantityLength(1.0, QuantityMeasurementApp.LengthUnit.YARD);
+        assertTrue(!a.equals(null), "Object should not equal null");
+    }
+
+    static void testEquality_CentimetersWithNullUnit() {
+        boolean thrown = false;
+        try {
+            QuantityMeasurementApp.compare(1.0, "cm", 1.0, null);
+        } catch (IllegalArgumentException e) {
+            thrown = true;
+        }
+        assertTrue(thrown, "Null unit should throw IllegalArgumentException");
+    }
+
+    static void testEquality_CentimetersSameReference() {
+        QuantityMeasurementApp.QuantityLength a = new QuantityMeasurementApp.QuantityLength(1.0, QuantityMeasurementApp.LengthUnit.CENTIMETER);
+        assertTrue(a.equals(a), "Reflexive property failed");
+    }
+
+    static void testEquality_CentimetersNullComparison() {
+        QuantityMeasurementApp.QuantityLength a = new QuantityMeasurementApp.QuantityLength(1.0, QuantityMeasurementApp.LengthUnit.CENTIMETER);
+        assertTrue(!a.equals(null), "Object should not equal null");
     }
 
     // Static compare helper tests
