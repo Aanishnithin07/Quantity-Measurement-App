@@ -90,6 +90,29 @@ public class QuantityMeasurementAppTest {
             failures++;
         }
 
+        // Cross-unit tests
+        try {
+            testCrossUnitEquality_SameValue();
+            System.out.println("testCrossUnitEquality_SameValue passed");
+        } catch (AssertionError e) {
+            System.err.println("testCrossUnitEquality_SameValue failed: " + e.getMessage());
+            failures++;
+        }
+        try {
+            testCrossUnitEquality_DifferentValue();
+            System.out.println("testCrossUnitEquality_DifferentValue passed");
+        } catch (AssertionError e) {
+            System.err.println("testCrossUnitEquality_DifferentValue failed: " + e.getMessage());
+            failures++;
+        }
+        try {
+            testCrossUnit_InvalidUnit();
+            System.out.println("testCrossUnit_InvalidUnit passed");
+        } catch (AssertionError e) {
+            System.err.println("testCrossUnit_InvalidUnit failed: " + e.getMessage());
+            failures++;
+        }
+
         if (failures == 0) {
             System.out.println("ALL TESTS PASSED");
         } else {
@@ -171,5 +194,25 @@ public class QuantityMeasurementAppTest {
     static void testStaticCompareInches() {
         assertTrue(QuantityMeasurementApp.compareInches(1.0, 1.0), "compareInches should return true for equal values");
         assertTrue(!QuantityMeasurementApp.compareInches(1.0, 2.0), "compareInches should return false for different values");
+    }
+
+    // Cross-unit tests
+    static void testCrossUnitEquality_SameValue() {
+        assertTrue(QuantityMeasurementApp.compare(1.0, "ft", 12.0, "in"), "1 ft should equal 12 in");
+        assertTrue(QuantityMeasurementApp.compare(12.0, "in", 1.0, "ft"), "12 in should equal 1 ft");
+    }
+
+    static void testCrossUnitEquality_DifferentValue() {
+        assertTrue(!QuantityMeasurementApp.compare(1.0, "ft", 11.0, "in"), "1 ft should not equal 11 in");
+    }
+
+    static void testCrossUnit_InvalidUnit() {
+        boolean thrown = false;
+        try {
+            QuantityMeasurementApp.compare(1.0, "meter", 100.0, "cm");
+        } catch (IllegalArgumentException e) {
+            thrown = true;
+        }
+        assertTrue(thrown, "Unknown unit should throw IllegalArgumentException");
     }
 }

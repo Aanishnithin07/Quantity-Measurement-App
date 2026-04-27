@@ -68,6 +68,24 @@ public class QuantityMeasurementApp {
         return new Inches(a).equals(new Inches(b));
     }
 
+    /**
+     * Compare two quantities that may use different units (ft/in).
+     * Supported units: ft, feet, foot, in, inch, inches (case-insensitive).
+     */
+    public static boolean compare(double value1, String unit1, double value2, String unit2) {
+        double v1 = toInches(value1, unit1);
+        double v2 = toInches(value2, unit2);
+        return Double.compare(v1, v2) == 0;
+    }
+
+    private static double toInches(double value, String unit) {
+        if (unit == null) throw new IllegalArgumentException("unit is null");
+        String u = unit.trim().toLowerCase();
+        if (u.equals("ft") || u.equals("feet") || u.equals("foot")) return value * 12.0;
+        if (u.equals("in") || u.equals("inch") || u.equals("inches")) return value;
+        throw new IllegalArgumentException("Unknown unit: " + unit);
+    }
+
     public static void main(String[] args) {
         Feet f1 = new Feet(1.0);
         Feet f2 = new Feet(1.0);
@@ -78,5 +96,9 @@ public class QuantityMeasurementApp {
         Inches i2 = new Inches(1.0);
         System.out.println("Inches Input: " + i1 + " and " + i2);
         System.out.println("Inches Equal: " + compareInches(i1.getValue(), i2.getValue()));
+
+        // Cross-unit demonstrations
+        System.out.println("Cross-unit 1 ft vs 12 in: " + compare(1.0, "ft", 12.0, "in"));
+        System.out.println("Cross-unit 1 ft vs 11 in: " + compare(1.0, "ft", 11.0, "in"));
     }
 }
