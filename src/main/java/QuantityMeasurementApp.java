@@ -127,7 +127,7 @@ public class QuantityMeasurementApp {
         if (!Double.isFinite(a.getValue()) || !Double.isFinite(b.getValue())) throw new IllegalArgumentException("values must be finite");
         double sumInches = a.toInches() + b.toInches();
         double resultValue = sumInches / target.getInchesPerUnit();
-        return new QuantityLength(resultValue, target);
+        return new QuantityLength(resultValue, target); 
     }
 
     /**
