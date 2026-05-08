@@ -4,7 +4,7 @@ public class QuantityMeasurementApp {
         INCH(1.0, "in", "inch", "inches"),
         FEET(12.0, "ft", "feet", "foot"),
         YARD(36.0, "yd", "yard", "yards"),
-        CENTIMETER(0.393701, "cm", "centimeter", "centimeters");
+        CENTIMETER(0.393701, "cm", "centimeter", "centimeters"); 
 
         private final double inchesPerUnit;
         private final String[] aliases;
