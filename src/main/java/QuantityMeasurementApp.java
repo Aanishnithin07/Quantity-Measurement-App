@@ -4,7 +4,7 @@ public class QuantityMeasurementApp {
         INCH(1.0, "in", "inch", "inches"),
         FEET(12.0, "ft", "feet", "foot"),
         YARD(36.0, "yd", "yard", "yards"),
-        CENTIMETER(0.393701, "cm", "centimeter", "centimeters");
+        CENTIMETER(0.393701, "cm", "centimeter", "centimeters"); 
 
         private final double inchesPerUnit;
         private final String[] aliases;
@@ -127,7 +127,7 @@ public class QuantityMeasurementApp {
         if (!Double.isFinite(a.getValue()) || !Double.isFinite(b.getValue())) throw new IllegalArgumentException("values must be finite");
         double sumInches = a.toInches() + b.toInches();
         double resultValue = sumInches / target.getInchesPerUnit();
-        return new QuantityLength(resultValue, target);
+        return new QuantityLength(resultValue, target); 
     }
 
     /**
